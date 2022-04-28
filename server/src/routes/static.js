@@ -11,22 +11,25 @@ router.use(history());
 
 router.use(
   serveStatic(UPLOAD_PATH, {
-    etag: false,
-    lastModified: false,
+    maxAge: 31536000,
+    etag: true,
+    lastModified: true,
   }),
 );
 
 router.use(
   serveStatic(PUBLIC_PATH, {
-    etag: false,
-    lastModified: false,
+    maxAge: 31536000,
+    etag: true,
+    lastModified: true,
   }),
 );
 
 router.use(
   serveStatic(CLIENT_DIST_PATH, {
-    etag: false,
-    lastModified: false,
+    maxAge: 31536000,
+    etag: true,
+    lastModified: true,
   }),
 );
 
