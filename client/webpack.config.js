@@ -9,6 +9,7 @@ const SRC_PATH = path.resolve(__dirname, './src');
 const PUBLIC_PATH = path.resolve(__dirname, '../public');
 const UPLOAD_PATH = path.resolve(__dirname, '../upload');
 const DIST_PATH = path.resolve(__dirname, '../dist');
+const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 /** @type {import('webpack').Configuration} */
 const config = {
@@ -50,6 +51,7 @@ const config = {
   output: {
     filename: NODE_ENV === 'production' ? 'scripts/[name]-[contenthash].js' : 'scripts/[name].js',
     path: DIST_PATH,
+    publicPath: ASSET_PATH,
   },
   plugins: [
     new webpack.ProvidePlugin({
