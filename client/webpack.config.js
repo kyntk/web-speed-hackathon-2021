@@ -25,10 +25,11 @@ const config = {
   devtool: NODE_ENV === 'production' ? false : 'inline-source-map',
   entry: {
     main: [
-      path.resolve(SRC_PATH, './index.css'),
+      path.resolve(SRC_PATH, './styles/index.css'),
       path.resolve(SRC_PATH, './buildinfo.js'),
       path.resolve(SRC_PATH, './index.jsx'),
     ],
+    webfont: path.resolve(SRC_PATH, './styles/webfont.css'),
   },
   mode: NODE_ENV,
   module: {
