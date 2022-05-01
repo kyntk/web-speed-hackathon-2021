@@ -2,6 +2,8 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -53,6 +55,10 @@ const config = {
     filename: NODE_ENV === 'production' ? 'scripts/[name]-[contenthash].js' : 'scripts/[name].js',
     path: DIST_PATH,
     publicPath: ASSET_PATH,
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
   },
   plugins: [
     new webpack.ProvidePlugin({
