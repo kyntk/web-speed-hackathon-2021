@@ -4,13 +4,13 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { AppPage } from '../../components/application/AppPage';
 import { useFetch } from '../../hooks/use_fetch';
 import { fetchJSON } from '../../utils/fetchers';
+import { NotFoundContainer } from '../NotFoundContainer';
+import { PostContainer } from '../PostContainer';
+import { TimelineContainer } from '../TimelineContainer';
+import { UserProfileContainer } from '../UserProfileContainer';
 
 const AuthModalContainer = lazy(() => import('../AuthModalContainer'));
 const NewPostModalContainer = lazy(() => import('../NewPostModalContainer'));
-const NotFoundContainer = lazy(() => import('../NotFoundContainer'));
-const PostContainer = lazy(() => import('../PostContainer'));
-const TimelineContainer = lazy(() => import('../TimelineContainer'));
-const UserProfileContainer = lazy(() => import('../UserProfileContainer'));
 const TermContainer = lazy(() => import('../TermContainer'));
 
 /** @type {React.VFC} */
