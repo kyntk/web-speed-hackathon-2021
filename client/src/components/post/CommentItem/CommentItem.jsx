@@ -1,4 +1,3 @@
-import moment from 'moment';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getProfileImagePath } from '../../../utils/get_path';
@@ -11,6 +10,7 @@ import { getProfileImagePath } from '../../../utils/get_path';
 
 /** @type {React.VFC<Props>} */
 const CommentItem = ({ comment }) => {
+  const time = new Date(comment.createdAt)
   return (
     <article className="px-1 hover:bg-gray-50 sm:px-4" style={{ contentVisibility: 'auto' }}>
       <div className="flex pb-4 pt-2 px-2 border-b border-gray-300 sm:px-4">
@@ -33,8 +33,8 @@ const CommentItem = ({ comment }) => {
           </p>
           <p className="text-gray-800 text-sm leading-relaxed">{comment.text}</p>
           <p className="text-gray-500 text-xs">
-            <time dateTime={moment(comment.createdAt).toISOString()}>
-              {moment(comment.createdAt).locale('ja').format('LL')}
+            <time dateTime={time.toISOString()}>
+              {new Intl.DateTimeFormat([], {dateStyle: 'long'}).format(time)}
             </time>
           </p>
         </div>
