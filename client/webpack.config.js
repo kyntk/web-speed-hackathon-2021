@@ -57,7 +57,7 @@ const config = {
     publicPath: ASSET_PATH,
   },
   optimization: {
-    minimize: true,
+    minimize: NODE_ENV === 'production',
     minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
   },
   plugins: [
