@@ -59,6 +59,9 @@ const config = {
   optimization: {
     minimize: NODE_ENV === 'production',
     minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   plugins: [
     new webpack.EnvironmentPlugin({

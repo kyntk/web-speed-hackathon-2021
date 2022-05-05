@@ -1,9 +1,24 @@
-import lodashChunk from 'lodash/chunk';
-import lodashMap from 'lodash/map';
-import lodashMax from 'lodash/max';
-import lodashMean from 'lodash/mean';
-import lodashZip from 'lodash/zip';
 import React from 'react';
+
+const zip = (arr1, arr2) => {
+  const result = [];
+  for(let i = 0; i < arr1.length; i++) {
+    result.push([arr1[i], arr2[i]]);
+  }
+  return result;
+};
+
+const mean = (arr) => {
+  const total = arr.reduce((sum, element) => sum + element, 0);
+  return total / arr.length
+};
+
+const chunk = (arr, chunkSize = 1, cache = []) => {
+  const tmp = [...arr];
+  if (chunkSize <= 0) return cache;
+  while (tmp.length) cache.push(tmp.splice(0, chunkSize));
+  return cache
+}
 
 /**
  * @param {ArrayBuffer} data
@@ -18,18 +33,18 @@ async function calculate(data) {
     audioCtx.decodeAudioData(data.slice(0), resolve, reject);
   });
   // 左の音声データの絶対値を取る
-  const leftData = lodashMap(buffer.getChannelData(0), Math.abs);
+  const leftData = buffer.getChannelData(0).map(Math.abs);
   // 右の音声データの絶対値を取る
-  const rightData = lodashMap(buffer.getChannelData(1), Math.abs);
+  const rightData = buffer.getChannelData(1).map(Math.abs);
 
   // 左右の音声データの平均を取る
-  const normalized = lodashMap(lodashZip(leftData, rightData), lodashMean);
+  const normalized = zip(leftData, rightData).map(mean);
   // 100 個の chunk に分ける
-  const chunks = lodashChunk(normalized, Math.ceil(normalized.length / 100));
+  const chunks = chunk(normalized, Math.ceil(normalized.length / 100));
   // chunk ごとに平均を取る
-  const peaks = lodashMap(chunks, lodashMean);
+  const peaks = chunks.map(mean)
   // chunk の平均の中から最大値を取る
-  const max = lodashMax(peaks);
+  const max = Math.max(peaks);
 
   return { max, peaks };
 }
