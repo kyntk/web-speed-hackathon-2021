@@ -2,8 +2,8 @@
  * @param {string} imageId
  * @returns {string}
  */
-function getImagePath(imageId) {
-  return `/images/${imageId}.avif`;
+function getImagePath(imageId, small) {
+  return `/images/${imageId}${small ? '-2' : ''}.avif`;
 }
 
 /**
