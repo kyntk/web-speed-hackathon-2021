@@ -55,12 +55,10 @@ async function sendFile(url, file) {
  */
 async function sendJSON(url, data) {
   const jsonString = JSON.stringify(data);
-  const uint8Array = new TextEncoder().encode(jsonString);
 
   return fetch(url, {
-    body: uint8Array,
+    body: jsonString,
     headers: {
-      'Content-Encoding': 'gzip',
       'Content-Type': 'application/json',
     },
     method: 'POST',

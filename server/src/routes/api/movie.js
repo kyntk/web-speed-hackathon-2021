@@ -1,15 +1,13 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-
 import Router from 'express-promise-router';
+import { promises as fs } from 'fs';
 import httpErrors from 'http-errors';
+import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
-
 import { convertMovie } from '../../converters/convert_movie';
 import { UPLOAD_PATH } from '../../paths';
 
 // 変換した動画の拡張子
-const EXTENSION = 'gif';
+const EXTENSION = 'webm';
 
 const router = Router();
 
